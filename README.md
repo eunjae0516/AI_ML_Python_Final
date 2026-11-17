@@ -86,7 +86,6 @@ Raw 데이터에서 확인한 문제는 다음과 같습니다.
 
 `data/processed/*_target.csv`(제공 후처리)와 `*_refined.csv`(추가 후처리, 30fps로 변환)를 Unity의 `BlazePose` 씬에서 재생해 확인했습니다.
 
-
 ---
 
 ## 폴더 구조
