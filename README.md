@@ -21,36 +21,6 @@
 
 ---
 
-## 실행 방법
-
-### 환경 설치
-
-```bash
-conda env create -f environment.yml
-conda activate ai_ml_final
-```
-
-테스트 환경: Python 3.10, mediapipe 0.10.21, opencv 4.11, numpy 1.26, scipy 1.15, matplotlib 3.10, viser 1.1.1
-
-### 순서
-
-```bash
-# 1) 영상 다운로드 + 3D 관절 추출 (url_list에 유튜브 링크 입력)
-python scripts/p1_create_raw_keypoints.py
-
-# 2) 제공된 후처리 적용 + Unity CSV 생성 (브라우저 3D 재생: 터미널에 표시되는 주소, 기본 localhost:8080)
-python scripts/p1_2_post_processing.py
-
-# 3) 문제 분석 + 추가 후처리 + 전후 비교 (results/ 에 그래프·지표 저장)
-python scripts/p1_3_compare_and_refine.py
-python scripts/p1_3_compare_and_refine.py --vis         # 제공 후처리(왼쪽) vs 추가 후처리(오른쪽) 3D 재생
-python scripts/p1_3_compare_and_refine.py --cutoff 8    # 스무딩 강도 변경 (기본 6Hz)
-```
-
-저장소에는 분석에 사용한 댄스 영상의 키포인트(`data/raw_keypoints/`)와 처리 결과(`data/processed/`)가 포함되어 있어, **1단계 없이 2·3단계를 바로 실행**할 수 있습니다.
-
----
-
 ## 1. Data Acquisition
 
 `p1_create_raw_keypoints.py`가 `pytubefix`로 영상을 내려받고, 각 프레임에 BlazePose를 적용해 `frame, landmark, x, y, z, visibility` 형태로 저장합니다. y축은 위가 +가 되도록 뒤집었습니다.
@@ -103,24 +73,18 @@ Raw 데이터에서 확인한 문제는 다음과 같습니다.
 | 골반 높이 변화 (m) | 0.003 | 0.363 | 0.357 |
 | 뼈 길이 변동 (%) | 9.9 | 9.9 | 9.9 |
 
-전체 지표는 [`results/metrics.csv`](results/metrics.csv)에 있습니다.
+주요 지표는 [`results/metrics.csv`](results/metrics.csv)에 있습니다.
 
 ### 해석
 
 - 추가 후처리로 **떨림이 약 81% 줄었고**, 춤의 상하 리듬(골반 높이 변화 0.36m)은 그대로 유지됐습니다.
-- 관절 위치는 평균 0.7cm만 바뀌었습니다. 큰 동작은 유지하고 빠른 노이즈만 제거됐다는 뜻입니다.
 - 제공된 방법은 **지면 문제**를 해결하고, 추가 방법은 여기에 더해 **떨림 문제**까지 해결합니다.
 
 ---
 
 ## Unity 시각화
 
-`data/processed/*_target.csv`(제공 후처리)와 `*_refined.csv`(추가 후처리, 30fps로 변환)는 Unity 프로젝트의 `BlazePose` 씬에서 재생할 수 있습니다.
-
-1. Unity 2022.3.62f3으로 프로젝트를 열고 `Assets/Scenes/BlazePose`를 엽니다.
-2. ▶ Play를 누르고 Hierarchy에서 `World`를 선택합니다.
-3. Inspector에서 **CSV Loader: Load CSV File Directory**로 CSV가 들어 있는 폴더를 고릅니다.
-4. 번호로 파일을 고른 뒤 **Import CSV → reset & play animation**을 누릅니다.
+`data/processed/*_target.csv`(제공 후처리)와 `*_refined.csv`(추가 후처리, 30fps로 변환)를 Unity의 `BlazePose` 씬에서 재생해 확인했습니다.
 
 
 ---
