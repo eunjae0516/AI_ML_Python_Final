@@ -1,0 +1,4 @@
+﻿video,fps,video_frames,detected_frames,missing_frames,longest_gap(frames),version,jitter_mean_accel(m/s2),bone_length_CV(%),lowest_foot_mean(m),lowest_foot_std(m),below_ground_frames(%),pelvis_height_range(m),joints_flattened_to_y0(%)
+L을_가져가_~__dance_trend,60,874,874,0,0,raw,105.00649931960308,9.850863032828013,-0.6338274987665957,0.07442707668027947,100.0,0.0027075494872406125,0.0
+L을_가져가_~__dance_trend,60,874,874,0,0,provided,116.92144501073703,9.850863032828013,0.0,0.0,0.0,0.36279520101379603,0.0
+L을_가져가_~__dance_trend,60,874,874,0,0,refined,20.16589165132986,9.876931385069495,0.0,0.0,0.0,0.3571980086391444,0.0

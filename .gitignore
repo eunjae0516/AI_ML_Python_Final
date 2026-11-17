@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Large / unrelated data
+data/MNIST/
+*.mp4
+checkpoints/
+data/dataset/
+scripts/number_*.png
+scripts/task2_results.png
+
+# Keypoints & processed data: keep only the dance video used for the analysis
+data/raw_keypoints/*.npz
+!data/raw_keypoints/L을_가져가_~__dance_trend.npz
+data/processed/*
+!data/processed/L을_가져가_~__dance_trend_*
+
+# Windows
+desktop.ini
+Thumbs.db
